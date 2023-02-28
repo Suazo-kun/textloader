@@ -1,4 +1,4 @@
-__version__ = "0.1"
+__version__ = "0.1.1"
 __author__ = "Suazo-kun (suazokun@gmail.com)"
 
 from threading import Thread
@@ -19,11 +19,11 @@ class BaseTextLoader:
 
     @property
     def current_animation(self) -> int:
-        return _current_animation if _current_animation >= 0 else 0
+        return self._current_animation if self._current_animation >= 0 else 0
 
     @property
     def current_character(self) -> str:
-        return _animation[current_animation]
+        return self._animation[self.current_animation]
 
     @property
     def animation_delay(self):
@@ -68,6 +68,7 @@ class BaseTextLoader:
         while not self._stop_animation:
             print('\r'+self._next_animation(), end="")
             sleep(self._animation_delay)
+        print()
 
 
 class CirculatePointsLoader(BaseTextLoader):
